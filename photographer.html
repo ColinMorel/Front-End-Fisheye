@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>    
+    <title>Fisheye - photographe </title>
+    <script src="./scripts/utils/MediaFactory.js"></script>
+    <script src="./scripts/pages/Controleur.js"></script>
+    <script src="./scripts/pages/Modele.js"></script>
+    <script src="./scripts/pages/Vues/VuePhotographer.js"></script>
+    <script src="./scripts/pages/Vues/VueLightbox.js"></script>
+    <script src="./scripts/utils/contactForm.js"></script>
+
+  </head>
+  <body>
+    <header>
+      <a href="index.html"> <img src="assets/images/logo.png" tabIndex="0" class="logo" /></a>
+    </header>    
+    <main id="main">
+      <div class="photographHeader">
+        <button class="contactButton">Contactez-moi</button>
+      </div>
+    </main>
+
+    <div id="lightboxModal">
+      <div id="lightboxMediaDiv">
+        <h1>Titre photo</h1>
+      </div>
+      <img id="lightboxLeftArrow" class="opacityChangeWhenHover" src="assets/icons/arrow.svg"/>
+      <img id="lightboxRightArrow" class="opacityChangeWhenHover" src="assets/icons/arrow.svg"/>
+      <img id="lightboxClose" class="opacityChangeWhenHover" src="assets/icons/close.svg"/>
+    </div>
+
+    <div id="contactModal">
+			<div class="modal">
+				<header>
+          <h2 id="modalTitle">Contactez-moi </h2>
+          <img id="closeFormIcon" src="assets/icons/close.svg"/>
+        </header>
+				<form id="form" onsubmit="formSumbit()">
+					<div class="formData">
+						<label for="formFirst" class="formLabels" >Prénom</label>
+						<input type="text" id="formFirst" data-type="text"/> <!-- on rajoute un attribut particulier dans la balise facile à lire en JS, où je met le nom que je veux-->
+					</div>
+					<div class="formData">
+						<label for="formLast" class="formLabels" >Nom</label>
+						<input type="text" id="formLast" data-type="text"/>
+					</div>
+					<div class="formData">
+						<label for="formEmail" class="formLabels">Email</label>
+						<input type="email" id="formEmail" data-type="email"/>
+					</div>
+					<div class="formData">
+						<label for="formMessage" class="formLabels">Message</label>
+						<input type="text" id="formMessage" data-type="text-area"/>
+					</div>
+          <button class="contactButton2">Envoyer</button>
+				</form>
+			</div>
+		</div>
+
+    <script>
+      let controleur = new Controleur;
+      controleur.showAPhotographer();
+      controleur.showMediasOfThePhotographer();      
+      let contactForm = new ContactForm;
+    </script>
+    <!-- <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/utils/contactForm.js"></script> -->
+  </body>
+</html>

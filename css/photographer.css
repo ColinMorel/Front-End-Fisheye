@@ -1,0 +1,351 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photographHeader{
+    background-color: #FAFAFA;
+    margin: 0 100px;
+    width: fit-content;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:300px;
+    align-items: center;
+}
+.photographHeader > div{
+    min-width: 250px;
+    grid-area: 1;
+}
+
+.photographHeader > div h1{
+    color: #D3573C;
+    font-size: 3rem;
+    font-weight: 200;
+    margin:5px 0;
+}
+
+.photographHeader > div h2{
+    color:#901C1C;
+    font-weight: 100;
+    font-size: 1.3rem;
+    margin:5px 0;
+    
+}
+
+.photographHeader > div p{
+    color:grey;
+    margin-top: 10px;
+} 
+.photographerSortBigDiv{
+    display: flex;
+    align-items: start;
+    margin-bottom: 3%;
+}
+.photographerSortDiv{
+    display: flex;
+    width: fit-content;
+    background-color:#901C1C;
+    flex-direction: column;
+    margin-left: 2%;
+}
+.photographerSortChevronClicked{
+    height: initial;
+    animation: height .5s ease-in-out;
+}
+.photographerSortLink.sortHidden{
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.photographerSortLink{
+    display: initial;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+i.fa-chevron-up{
+    transform: rotate(0);
+    transition: transform .5s ease-in-out;
+    color: white;
+}
+.chevronClicked{
+    transform: rotate(180deg) !important;
+    transition: transform 0.5s ease-in-out
+}
+.chevronClickedreset{
+    transform: rotate(0);
+}
+.photographerSortPopularityDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
+}
+.photographerSortPopularityUpLink{
+    margin-left: 10px;
+}
+.photographerSortDiv > *{
+    border-bottom: 1px solid white;
+    padding: 5px;
+    color: white;
+    height: 1.5rem;
+}
+.photographerSortLink{
+    display: flex;
+    align-items: start;
+}
+
+.photographHeaderImg{
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.contactButton{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.photographerMain{
+    width: 80%;    
+    display: flex;
+    flex-direction: column;
+}
+
+.photographerGrid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:100px;
+    color:#901C1C;
+
+}
+
+.photographerMediaCard{
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+}
+
+.photographerMediaCardLowDiv{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between ;
+    padding-left: 10px;
+}
+
+.photographerMediaCardLikesDiv{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position:relative;
+}
+
+.photographerGrid h2{
+    font-size:1em;
+    font-weight: 100;
+    width: fit-content;
+}
+.photographerGrid p{
+    font-size:1em;
+}
+
+.photographerHeartIcon{
+    position: absolute;
+    left: 50%;
+}
+
+.heartLiked{
+    transform: rotate(360deg);
+    transition: all 0.4s ease-out;
+    font-weight: 900 !important;
+}
+.photographerMediaCardImgOrVideo{
+    border-radius: 10px;
+    width: 100%;
+    height: 90%;
+    object-fit:cover;
+}
+.photographerMediaCardImgOrVideo:hover{
+    cursor: pointer;
+    scale: 1.05;
+    transition: scale 0.5s;
+}
+.totalLikesDiv{
+    position: fixed;
+    bottom: 0;
+    right: 5%;
+    background-color: #db8876;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.totalLikesRightPart{
+    margin-left: 50px;
+}
+.totalLikesLeftPart{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.totalLikesText{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px;
+    margin-right: 10px;
+    min-width: 2em;
+
+}
+#contactModal{
+    display: none;
+    z-index: 10;
+    position: fixed;
+    top:5%;
+    width: 100vw;
+    height: 100vh;
+    margin: none;
+    padding: 0;
+}
+
+.modal{
+    z-index: 11;
+    border-radius: 5px;
+    background-color: #DB8876;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
+}
+
+.modal header{
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modal header img{
+    cursor: pointer;
+}
+
+.modal header h2{
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+form{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form label{
+    color: #312E2E;
+    font-size: 36px;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: self-start;
+    margin-bottom: 26px;
+}
+
+form input{
+    width: 100%;
+    height: 68px;
+    border: none;
+    border-radius: 5px;
+}
+
+#lightboxModal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    animation: LightboxAppear 0.3s;
+}
+
+#lightboxMediaDiv{
+    width: 85%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.lightboxMedia{
+    max-width: 100%;
+    max-height: 90%;
+    object-fit: cover;
+}
+
+#lightboxMedia h1{
+    color:#901C1C;
+    font-size: 2rem;
+    height: 10%;
+
+}
+
+#lightboxLeftArrow,
+#lightboxRightArrow{
+    position: fixed;
+    top:50%;
+    right: 3%;
+    z-index: 11;
+}
+
+#lightboxLeftArrow{
+    left: 3%;
+    rotate: 180deg;
+}
+
+#lightboxClose{
+    position: fixed;
+    top: 5%;
+    right: 3%;
+    z-index: 12;
+}
+
+@keyframes LightboxAppear{
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+
+.opacityChangeWhenHover{
+    opacity: 0.7;
+    transition: 0.3s;
+}
+.opacityChangeWhenHover:hover{
+    cursor: pointer;
+    opacity: 1;
+}
