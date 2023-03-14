@@ -23,7 +23,6 @@ class ContactForm{
         const listInputs = document.querySelectorAll("#form input");        
         for(let currentInput of listInputs){
             this.isInputValidList[currentInput.id]=false;
-            console.log(currentInput.dataset.type);
             switch(currentInput.dataset.type){ /* pour récuperer mon data-type que j'ai ajouté*/ 
                 case "text":        
                     this.inputIsNameHandler(currentInput);            

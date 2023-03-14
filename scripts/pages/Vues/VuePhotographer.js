@@ -132,7 +132,7 @@ class VuePhotographer {
             photographerMediaCardImgOrVideo.id = this.mediasOfAPhotographer[i].id;
             photographerMediaCardImgOrVideo.style.maxWidth = "100%";
             photographerMediaCardImgOrVideo.classList.add("photographerMediaCardImgOrVideo");
-            
+            photographerMediaCardImgOrVideo.alt=this.mediasOfAPhotographer[i].title;
 
 
             let photographerMediaCardLowDiv = document.createElement("div");
