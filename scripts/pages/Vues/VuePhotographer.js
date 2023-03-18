@@ -152,7 +152,6 @@ class VuePhotographer {
             photographerMediaCardImgOrVideo.id = this.mediasOfAPhotographer[i].id;
             photographerMediaCardImgOrVideo.style.maxWidth = "100%";
             photographerMediaCardImgOrVideo.classList.add("photographerMediaCardImgOrVideo");
-<<<<<<< HEAD
             photographerMediaCardImgOrVideo.tabIndex=6+(i+1);
             photographerMediaCardImgOrVideo.alt=this.mediasOfAPhotographer[i].title;
             photographerMediaCardImgOrVideo.setAttribute("aria-label",`${this.mediasOfAPhotographer[i].title}, sélectionnez le pour afficher sa lightbox`)
@@ -163,9 +162,6 @@ class VuePhotographer {
                     vueLightbox.lightboxHandler(true,photographerMediaCardImgOrVideo);
                 }
             })
-=======
-            photographerMediaCardImgOrVideo.alt=this.mediasOfAPhotographer[i].title;
->>>>>>> master
 
 
             let photographerMediaCardLowDiv = document.createElement("div");
