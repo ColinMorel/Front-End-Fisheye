@@ -39,7 +39,7 @@ class VuePhotographer {
 
         const modalTitle = document.getElementById("modalTitle");
         modalTitle.innerText += photographer.name;
-    }
+    };
 
     displayPageOfAPhotographer(){        
         this.displaySortButtons();
@@ -60,8 +60,10 @@ class VuePhotographer {
         photographerSortPopularityDiv.classList.add("photographerSortPopularityDiv")
         let photographerSortPopularity = document.createElement("div");
         photographerSortPopularity.innerHTML = "Popularité";
+        photographerSortPopularity.setAttribute("aria-label","Tri par popularité");
         let photographerSortPopularityUp = document.createElement("a");
         photographerSortPopularityUp.classList.add("photographerSortPopularityUpLink");
+        photographerSortPopularityUp.tabIndex=4;
                
         this.photographerMain.appendChild(photographerSortBigDiv);
         photographerSortBigDiv.appendChild(photographerMainTitle);
@@ -73,36 +75,53 @@ class VuePhotographer {
         photographerSortPopularityUpImg.classList.add("fa-solid", "fa-chevron-up");
         photographerSortPopularityUp.appendChild(photographerSortPopularityUpImg);
         photographerSortPopularity.classList.add("photographerSortLink");
+        photographerSortPopularity.tabIndex=3;
         let photographerSortDate = document.createElement("div");
         photographerSortDate.classList.add("photographerSortLink");
         photographerSortDate.innerHTML = "Date";
+        photographerSortDate.setAttribute("aria-label","Tri par date");
         photographerSortDate.classList.add("photographerSortDate");
 
         let photographerSortTitle = document.createElement("div");
         photographerSortTitle.classList.add("photographerSortTitle");
         photographerSortTitle.classList.add("photographerSortLink");
         photographerSortTitle.innerHTML = "Titre";
+        photographerSortTitle.setAttribute("aria-label","Tri par ordre alphabétique");
         photographerSort.appendChild(photographerSortDate);
         photographerSort.appendChild(photographerSortTitle);
 
         photographerSortDate.classList.add("sortHidden");
-        photographerSortTitle.classList.add("sortHidden");
+        photographerSortDate.tabIndex=5;
+        photographerSortTitle.tabIndex=6;
+
         let photographerSortPopularityUpImgAngle = 0;
-        photographerSortPopularityUp.addEventListener("click", () => {
-            photographerSortPopularityUpImgAngle+=180;
-            photographerSortPopularityUpImg.style.transform=`rotate(${photographerSortPopularityUpImgAngle}deg)`;
-            if (photographerSortPopularityUp.isClicked) {
-                photographerSortPopularityUp.isClicked = false;
-                photographerSortDate.classList.add("sortHidden");
-                photographerSortTitle.classList.add("sortHidden");
-            } else {
-                photographerSortPopularityUp.isClicked = true;
-                photographerSortDate.classList.remove("sortHidden");
-                photographerSortTitle.classList.remove("sortHidden");
+        photographerSortTitle.classList.add("sortHidden");
+        photographerSortPopularityUp.addEventListener("keypress",(e)=>{
+            if(e.key === "Enter"){
+                photographerSortPopularityUpImgAngle = this.popularityUpClicked(photographerSortPopularityUp,photographerSortPopularityUpImg,photographerSortPopularityUpImgAngle,photographerSortDate,photographerSortTitle);
             }
+        })
+        photographerSortPopularityUp.addEventListener("click", () => {
+            photographerSortPopularityUpImgAngle = this.popularityUpClicked(photographerSortPopularityUp,photographerSortPopularityUpImg,photographerSortPopularityUpImgAngle,photographerSortDate,photographerSortTitle);
         })
 
         this.addEventSortMediasOfAPhotographer(photographerSortPopularity,photographerSortTitle,photographerSortDate);
+    }
+
+    popularityUpClicked(Btn,Img,Angle,SortDate,SortTitle){
+        Angle+=180;
+        console.log(Angle)
+        Img.style.transform=`rotate(${Angle}deg)`;
+        if (Btn.isClicked) {
+            Btn.isClicked = false;
+            SortDate.classList.add("sortHidden");
+            SortTitle.classList.add("sortHidden");
+        } else {
+            Btn.isClicked = true;
+            SortDate.classList.remove("sortHidden");
+            SortTitle.classList.remove("sortHidden");
+        }
+        return Angle;
     }
 
     displayMediasOfAPhotographer(){
@@ -112,6 +131,7 @@ class VuePhotographer {
         this.photographerMain.appendChild(photographerGrid);        
 
         let totalLikesOfAPhotographer = 0;
+        let vueLightbox = new VueLightbox();
 
         for (let i = 0; i < this.mediasOfAPhotographer.length; i++){
             let photographerMediaCard = document.createElement("div");
@@ -132,7 +152,16 @@ class VuePhotographer {
             photographerMediaCardImgOrVideo.id = this.mediasOfAPhotographer[i].id;
             photographerMediaCardImgOrVideo.style.maxWidth = "100%";
             photographerMediaCardImgOrVideo.classList.add("photographerMediaCardImgOrVideo");
-            
+            photographerMediaCardImgOrVideo.tabIndex=6+(i+1);
+            photographerMediaCardImgOrVideo.alt=this.mediasOfAPhotographer[i].title;
+            photographerMediaCardImgOrVideo.setAttribute("aria-label",`${this.mediasOfAPhotographer[i].title}, sélectionnez le pour afficher sa lightbox`)
+
+           
+            photographerMediaCardImgOrVideo.addEventListener("keypress",(e)=>{
+                if(e.key === "Enter"){
+                    vueLightbox.lightboxHandler(true,photographerMediaCardImgOrVideo);
+                }
+            })
 
 
             let photographerMediaCardLowDiv = document.createElement("div");
@@ -149,6 +178,14 @@ class VuePhotographer {
 
             let photographerMediaCardHeart = document.createElement("i");
             photographerMediaCardHeart.classList.add("fa-regular", "fa-heart", "photographerHeartIcon");
+            photographerMediaCardHeart.tabIndex=6+(i+1);            
+            photographerMediaCardHeart.setAttribute("aria-label",`${this.mediasOfAPhotographer[i].title} like button`);
+
+            photographerMediaCardHeart.addEventListener("keypress",(e)=>{
+                if(e.key === "Enter"){
+                    this.likesClicked(e);
+                }
+            })
             
             photographerMediaCardHeart.addEventListener("click", (e) => {
                 this.likesClicked(e);
@@ -203,50 +240,68 @@ class VuePhotographer {
     addEventSortMediasOfAPhotographer(popularitySort,titleSort,dateSort){
 
         let vueLightbox = new VueLightbox();
-
         popularitySort.addEventListener("click",()=>{
-            this.mediasOfAPhotographer.sort((a,b)=>b.likes - a.likes);
-            while(this.photographerMain.firstChild){
-                this.photographerMain.removeChild(this.photographerMain.lastChild);
+            this.sortByLikes(vueLightbox);
+        })
+        popularitySort.addEventListener("keypress",(e)=>{
+            if(e.key==="Enter"){
+                this.sortByLikes(vueLightbox);
             }
-            
-            this.displayPageOfAPhotographer();
-            vueLightbox.lightboxHandler();
         })
         dateSort.addEventListener("click",()=>{
-            console.log("Tri par date YYYY/MM/DD")
-            this.mediasOfAPhotographer.sort((a,b)=>{
-                if (a.date < b.date) {return -1;}
-                if (a.date > b.date) {return 1;}
-                return 0;
-            });
-            while(this.photographerMain.firstChild){
-                this.photographerMain.removeChild(this.photographerMain.lastChild);
+            this.sortByDate(vueLightbox);
+        })
+        dateSort.addEventListener("keypress",(e)=>{
+            if(e.key==="Enter"){
+                this.sortByDate(vueLightbox);
             }
-
-            // console.log(photographerSortDiv.childNodes[0])
-            // photographerSortDiv.replaceChild(photographerSortPopularityDiv,photographerSortDate);
-            // console.log(photographerSortDiv.childNodes[0])
-
-            this.displayPageOfAPhotographer();
-            vueLightbox.lightboxHandler();
         })
         titleSort.addEventListener("click",()=>{
-            this.mediasOfAPhotographer.sort((a,b)=>{
-                const nameA = a.title.toUpperCase();
-                const nameB = b.title.toUpperCase();
-                if (nameA < nameB) {return -1;}
-                if (nameA > nameB) {return 1;}
-                return 0;
-            });
-            while(this.photographerMain.firstChild){
-                this.photographerMain.removeChild(this.photographerMain.lastChild);
+            this.sortByName(vueLightbox);
+        })
+        titleSort.addEventListener("keypress",(e)=>{
+            if(e.key==="Enter"){
+                this.sortByName(vueLightbox);
             }
-            this.displayPageOfAPhotographer();
-            vueLightbox.lightboxHandler();
         })
     }
+    sortByLikes(vueLightbox){
+        this.mediasOfAPhotographer.sort((a,b)=>b.likes - a.likes);
+        while(this.photographerMain.firstChild){
+            this.photographerMain.removeChild(this.photographerMain.lastChild);
+        }
+        
+        this.displayPageOfAPhotographer();
+        vueLightbox.lightboxHandler();
+    }
+    sortByDate(vueLightbox){
+        console.log("Tri par date YYYY/MM/DD")
+        this.mediasOfAPhotographer.sort((a,b)=>{
+            if (a.date < b.date) {return -1;}
+            if (a.date > b.date) {return 1;}
+            return 0;
+        });
+        while(this.photographerMain.firstChild){
+            this.photographerMain.removeChild(this.photographerMain.lastChild);
+        }
 
+        this.displayPageOfAPhotographer();
+        vueLightbox.lightboxHandler();
+    }
+    sortByName(vueLightbox){
+        this.mediasOfAPhotographer.sort((a,b)=>{
+            const nameA = a.title.toUpperCase();
+            const nameB = b.title.toUpperCase();
+            if (nameA < nameB) {return -1;}
+            if (nameA > nameB) {return 1;}
+            return 0;
+        });
+        while(this.photographerMain.firstChild){
+            this.photographerMain.removeChild(this.photographerMain.lastChild);
+        }
+        this.displayPageOfAPhotographer();
+        vueLightbox.lightboxHandler();
+    }
     likesClicked(e) {
         let heartParent = e.target.closest(".photographerMediaCardLikesDiv");
         let heartLikesTag = heartParent.querySelector("p");

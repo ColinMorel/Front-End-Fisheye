@@ -5,7 +5,6 @@ class ContactForm{
         this.header = document.querySelector("header");
         this.main = document.querySelector("main");  
         const contactButton = document.querySelector(".contactButton");
-        contactButton.tabIndex="0";
         contactButton.addEventListener("click",()=>this.displayModal());  //Vu qu'on est dans une classe, on doit utiliser la notation fléchée pour pouvoir, dans displayModal, utiliser les this.modal....
         this.isInputValidList = {}; //Objet plutôt que tableau pour avoir en guise de clé, un id par exemple plutot que 0 1 2 3 ...
         this.sendFormButton = document.querySelector(".contactButton2");

@@ -11,7 +11,7 @@ class VueIndex{
 
             let photographerImage = document.createElement("img");
             photographerImage.src=`./././assets/SamplePhotos/PhotographersIdPhotos/${photographers[i].portrait}`;
-            photographerImage.alt=`${photographers.portrait}`;
+            photographerImage.alt=`${photographers[i].portrait}`;
             photographerLink.appendChild(photographerImage);
 
             let photographerName = document.createElement("h2");
@@ -32,5 +32,5 @@ class VueIndex{
             photographerCard.appendChild(photographerPrice);
 
         }
-    }    
+    };    
 }

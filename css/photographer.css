@@ -115,6 +115,10 @@ i.fa-chevron-up{
     border-radius: 5px;
     cursor: pointer;
 }
+.contactButton:hover,.contactButton:focus{
+    background-color: #db8876;
+    color: black;
+}
 
 .photographerMain{
     width: 80%;    

@@ -5,6 +5,9 @@ body {
     margin: 0;
 }
 
+main.hidden{
+    display: none;
+}
 
 header {
     display: flex;
@@ -21,9 +24,11 @@ a{
     align-items: center;
 }
 
-h1 {
-    color: #901C1C;
+h1:not(#currentMediaTitle) {
     margin-right: 100px;
+}
+h1{
+    color: #901C1C;
 }
 
 p{

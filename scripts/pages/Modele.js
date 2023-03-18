@@ -5,7 +5,7 @@ class Modele{
         .then(function(data){
             return data.photographers; //return le tableau d'objet des photographeurs
         });
-    }
+    };
 
     getAPhotographer(id){
         return fetch("././data/photographers.json")
@@ -14,8 +14,8 @@ class Modele{
             for(let i=0;i<data.photographers.length;i++){
                 if(data.photographers[i].id == id){
                     return data.photographers[i];
-                }
-            }
+                };
+            };
         });
     }
 
@@ -27,8 +27,8 @@ class Modele{
             for(let i=0;i<data.media.length;i++){
                 if(data.media[i].photographerId == id){
                     mediasOfThePhotographer.push(data.media[i]);
-                }
-            }
+                };
+            };
             return mediasOfThePhotographer; //return le tableau d'objet des photographeurs
         });
     }

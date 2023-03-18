@@ -27,4 +27,5 @@ class Controleur{
         vue.displayPageOfAPhotographer();
         vueLightbox.lightboxHandler();
     }
+    
 }

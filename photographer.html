@@ -17,17 +17,17 @@
   </head>
   <body>
     <header>
-      <a href="index.html"> <img src="assets/images/logo.png" tabIndex="0" class="logo" /></a>
+      <a href="index.html"> <img src="assets/images/logo.png" tabIndex=1 class="logo" /></a>
     </header>    
     <main id="main">
       <div class="photographHeader">
-        <button class="contactButton">Contactez-moi</button>
+        <button class="contactButton" tabindex=2>Contactez-moi</button>
       </div>
     </main>
 
     <div id="lightboxModal">
       <div id="lightboxMediaDiv">
-        <h1>Titre photo</h1>
+        <h1 id="currentMediaTitle">Titre photo</h1>
       </div>
       <img id="lightboxLeftArrow" class="opacityChangeWhenHover" src="assets/icons/arrow.svg"/>
       <img id="lightboxRightArrow" class="opacityChangeWhenHover" src="assets/icons/arrow.svg"/>
